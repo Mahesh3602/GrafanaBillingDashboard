@@ -1,0 +1,7 @@
+$importdata = Import-Csv -Path /Users/maheshbiradar/Downloads/test.csv | Converto-json -Compress
+$apikey = "R9zntJHRsi2Aqpx7163KiDy4DZVWUqa4FdlLzA50"
+$Headers = @{
+    "x-api-key" = $apikey
+}
+
+invoke-RestMethod -Uri "https://vji69ue1t5.execute-api.us-east-1.amazonaws.com/example/mydemoresource" -Method Put -Body $importdata -Headers $Headers 

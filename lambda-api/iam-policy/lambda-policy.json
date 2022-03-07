@@ -1,0 +1,25 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": [
+          "logs:CreateLogGroup"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:logs:us-east-1:834652494746:*"
+      },
+      {
+        "Action": [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:logs:us-east-1:834652494746:log-group:/aws/lambda/*"
+      },
+      {
+        "Action": ["s3:*","s3-object-lambda:*"],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ]
+  }

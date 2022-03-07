@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "grafana.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "aws:SourceAccount": "834652494746"
+                },
+                "StringLike": {
+                    "aws:SourceArn": "arn:aws:grafana:us-east-1:834652494746:/workspaces/*"
+                }
+            }
+        }
+    ]
+}

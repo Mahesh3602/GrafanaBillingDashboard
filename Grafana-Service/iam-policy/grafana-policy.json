@@ -1,0 +1,67 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "glue:BatchCreatePartition",
+                "glue:DeleteDatabase",
+                "cloudwatch:DeleteAlarms",
+                "glue:GetPartitions",
+                "glue:BatchDeletePartition",
+                "glue:UpdateTable",
+                "glue:DeleteTable",
+                "s3:ListBucket",
+                "aws-portal:ViewUsage",
+                "athena:*",
+                "aws-portal:ViewPaymentMethods",
+                "aws-portal:ViewBilling",
+                "glue:CreatePartition",
+                "glue:UpdatePartition",
+                "glue:UpdateDatabase",
+                "glue:CreateTable",
+                "glue:GetTables",
+                "aws-portal:ViewAccount",
+                "glue:BatchGetPartition",
+                "glue:GetDatabases",
+                "glue:GetTable",
+                "glue:GetDatabase",
+                "cloudwatch:PutMetricAlarm",
+                "glue:GetPartition",
+                "s3:ListAllMyBuckets",
+                "glue:CreateDatabase",
+                "cloudwatch:DescribeAlarms",
+                "glue:BatchDeleteTable",
+                "glue:DeletePartition",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucketMultipartUploads",
+                "s3:PutBucketPublicAccessBlock",
+                "s3:AbortMultipartUpload",
+                "s3:CreateBucket",
+                "s3:ListBucket",
+                "s3:GetBucketLocation",
+                "s3:ListMultipartUploadParts"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
