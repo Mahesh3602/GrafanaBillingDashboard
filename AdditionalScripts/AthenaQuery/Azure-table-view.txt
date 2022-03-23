@@ -1,0 +1,53 @@
+AZURE 
+
+Query for Azure Table :
+
+CREATE EXTERNAL TABLE `azurecost`(
+  `subscriptionguid` string, 
+  `resourcegroup` string, 
+  `resourcelocation` string, 
+  `usagedatetime` date, 
+  `metercategory` string, 
+  `metersubcategory` string, 
+  `meterid` string, 
+  `metername` string, 
+  `meterregion` string, 
+  `usagequantity` string, 
+  `resourcerate` string, 
+  `pretaxcost` string, 
+  `consumedservice` string, 
+  `resourcetype` string, 
+  `instanceid` string, 
+  `tags` string, 
+  `offerid` string, 
+  `additionalinfo` string, 
+  `serviceinfo1` string, 
+  `serviceinfo2` string, 
+  `servicename` string, 
+  `servicetier` string, 
+  `currency` string, 
+  `unitofmeasure` string)
+ROW FORMAT DELIMITED 
+  FIELDS TERMINATED BY '\;' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  's3://azurebillingdata/'
+TBLPROPERTIES (
+  'has_encrypted_data'='false', 
+  'transient_lastDdlTime'='1645540493')
+  
+
+View for Azure:
+CREATE OR REPLACE VIEW "vw_azurecost" AS 
+SELECT
+  CAST("replace"(pretaxcost, '"', '') AS decimal(38,3)) pretaxcost1
+, usagedatetime usagedatetime1
+, *
+, CAST("json_extract"("substring"("replace"(tags, '""', '"'), 2, ("length"("replace"(tags, '""', '"')) - 2)), '$["environment"]') AS varchar) environment
+, CAST("json_extract"("substring"("replace"(tags, '""', '"'), 2, ("length"("replace"(tags, '""', '"')) - 2)), '$["Created By"]') AS varchar) "Created By"
+FROM
+  athenacurcfn_billing_reporttf.azurecost
+WHERE (NOT (subscriptionguid LIKE '%SubscriptionGuid%'))
